@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+BUILD=$(pwd)/build
+version=$(cat VERSION)
+size=$(du -csh deb/ | sed '1!d' | grep -oe "^[0-9]*")
+goarch=$1
+
+if [ -z $1 ]; then
+    echo "Missing architecture param."
+    echo "Usage: ./package ( amd64 | arm )"
+    exit 1
+fi
+
+architecture=$( echo $goarch | sed 's/arm/armhf/g' )
+
+rm -Rf $BUILD
+mkdir -p $BUILD/release $BUILD/tmp
+
+echo "Building version $version..."
+
+# Architectures: i386, amd64, armle
+
+cp -R deb/* $BUILD/tmp
+sed -i 's/{{version}}/'${version}'/g;s/{{size}}/'${size}'/g;s/{{architecture}}/'${architecture}'/g' $BUILD/tmp/DEBIAN/control
+
+if [ "$goarch" = "arm" ]; then
+    GOOS=linux GOARCH=arm GOARM=7 go build -o $BUILD/tmp/usr/bin/notify-mail main.go
+fi
+if [ "$goarch" = "amd64" ]; then
+    GOOS=linux GOARCH=amd64 go build -o $BUILD/tmp/usr/bin/notify-mail main.go
+fi
+
+fakeroot dpkg-deb -b -z9 $BUILD/tmp $BUILD/release
+
+echo done
+
