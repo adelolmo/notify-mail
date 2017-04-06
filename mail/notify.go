@@ -14,7 +14,7 @@ type Mail struct {
 
 func NewNotification() (*Mail, error) {
 	keys := []string{
-		"NOTIFY_MAIL_SENDER",
+		"NOTIFY_MAIL_ACCOUNT",
 		"NOTIFY_MAIL_PASSWORD",
 	}
 	n := map[string]string{}
@@ -27,7 +27,7 @@ func NewNotification() (*Mail, error) {
 	}
 	auth := smtp.PlainAuth(
 		"Notification",
-		n["NOTIFY_MAIL_SENDER"],
+		n["NOTIFY_MAIL_ACCOUNT"],
 		n["NOTIFY_MAIL_PASSWORD"],
 		"smtp.gmail.com",
 	)
