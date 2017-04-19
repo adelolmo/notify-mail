@@ -10,6 +10,7 @@ It uses a gmail account to send notification mails.
 ## Setup repository
 ```
 wget -O - http://adelolmo.github.io/andoni.delolmo@gmail.com.gpg.key | sudo apt-key add -
+echo "deb http://adelolmo.github.io xenial main" | sudo tee /etc/apt/sources.list.d/adelolmo.list
 sudo apt-get update
 ```
 
