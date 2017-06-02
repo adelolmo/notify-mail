@@ -31,20 +31,26 @@ func NewNotification() (*Mail, error) {
 		n["NOTIFY_MAIL_PASSWORD"],
 		"smtp.gmail.com",
 	)
-	return &Mail{Authentication:auth}, nil
+	return &Mail{
+		Sender:"Notification",
+		Authentication:auth,
+	}, nil
 }
 
 func (m *Mail) Send(recipient, subject, message string) {
-	header := make(map[string]string)
+	header := make(map[string]string, 5)
 	header["From"] = m.Sender
 	header["To"] = recipient
 	header["Subject"] = subject
+	header["MIME-Version"] = "1.0"
+	header["Content-Type"] = "text/html; charset=utf-8"
 
 	content := ""
 	for k, v := range header {
 		content += fmt.Sprintf("%s: %s\r\n", k, v)
 	}
-	content += "\r\n" + message
+	content += "\r\n" + message + "\r\n"
+	fmt.Println(content)
 
 	err := smtp.SendMail(
 		"smtp.gmail.com:587",
