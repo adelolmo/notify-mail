@@ -50,7 +50,6 @@ func (m *Mail) Send(recipient, subject, message string) {
 		content += fmt.Sprintf("%s: %s\r\n", k, v)
 	}
 	content += "\r\n" + message + "\r\n"
-	fmt.Println(content)
 
 	err := smtp.SendMail(
 		"smtp.gmail.com:587",
