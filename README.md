@@ -7,7 +7,17 @@ It uses a gmail account to send notification mails.
 
 # How to Install
 
-## Setup repository
+## Via package
+
+Download latest version from https://github.com/adelolmo/notify-mail/releases/latest
+
+```
+sudo dpkg -i notify-mail_1.1.1_amd64.deb
+```
+
+## Via debian/ubuntu repository
+
+### Setup repository
 
 ```
 sudo apt-get install apt-transport-https
@@ -26,7 +36,7 @@ echo "deb http://adelolmo.github.io jessie main" | sudo tee /etc/apt/sources.lis
 sudo apt-get update
 ```
 
-## Install package
+### Install package
 ```
 sudo apt-get install notify-mail
 ```
