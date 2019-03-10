@@ -12,7 +12,7 @@ It uses a gmail account to send notification mails.
 Download latest version from https://github.com/adelolmo/notify-mail/releases/latest
 
 ```
-sudo dpkg -i notify-mail_1.1.1_amd64.deb
+sudo dpkg -i notify-mail_1.2.0_amd64.deb
 ```
 
 ## Via debian/ubuntu repository
@@ -56,8 +56,16 @@ export NOTIFY_MAIL_PASSWORD=your_password
 
 # How to Use
 
+## Send with body content 
+
 ```
 notify-mail -recipient="email_address@email_provider.com" -subject="Notification" -message="Your message"
+```
+
+## Send with template
+
+```
+notify-mail -recipient="email_address@email_provider.com" -subject="Notification" -template="/path/to/template.html" -variables="{{var1}}=value of var1,{{var2}}=value of var2"
 ```
 
 # How to remove
