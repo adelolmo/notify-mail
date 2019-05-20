@@ -9,11 +9,11 @@ type Template struct {
 	Map map[string]string
 }
 
-func NewTemplate(placeholderMap map[string]string) *Template {
-	return &Template{Map: placeholderMap}
+func NewTemplate(placeholders map[string]string) *Template {
+	return &Template{Map: placeholders}
 }
 
-func (ph *Template) ReplaceContent(filename string) (string, error) {
+func (t *Template) ReplaceContent(filename string) (string, error) {
 	input, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return "", err
@@ -21,7 +21,7 @@ func (ph *Template) ReplaceContent(filename string) (string, error) {
 
 	lines := strings.Split(string(input), "\n")
 	for i := range lines {
-		for key, value := range ph.Map {
+		for key, value := range t.Map {
 			lines[i] = strings.Replace(lines[i], key, value, -1)
 		}
 	}

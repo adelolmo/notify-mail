@@ -12,33 +12,18 @@ It uses a gmail account to send notification mails.
 Download latest version from https://github.com/adelolmo/notify-mail/releases/latest
 
 ```
-sudo dpkg -i notify-mail_1.2.0_amd64.deb
+# dpkg -i notify-mail_1.2.0_amd64.deb
 ```
 
 ## Via debian/ubuntu repository
 
 ### Setup repository
 
-```
-sudo apt-get install apt-transport-https
-```
-
-For amd64:
-```
-wget -O - http://adelolmo.github.io/andoni.delolmo@gmail.com.gpg.key | sudo apt-key add -
-echo "deb http://adelolmo.github.io xenial main" | sudo tee /etc/apt/sources.list.d/adelolmo.list
-sudo apt-get update
-```
-For arm:
-```
-wget -O - http://adelolmo.github.io/andoni.delolmo@gmail.com.gpg.key | sudo apt-key add -
-echo "deb http://adelolmo.github.io jessie main" | sudo tee /etc/apt/sources.list.d/adelolmo.list
-sudo apt-get update
-```
+Follow the instructions [here](https://adelolmo.github.io).
 
 ### Install package
 ```
-sudo apt-get install notify-mail
+# apt-get install notify-mail
 ```
 
 ## Configuration
@@ -70,5 +55,5 @@ notify-mail -recipient="email_address@email_provider.com" -subject="Notification
 
 # How to remove
 ```
-sudo apt-get purge notify-mail
+# apt-get remove notify-mail
 ```
