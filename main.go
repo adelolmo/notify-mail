@@ -18,6 +18,7 @@ func main() {
 		if err = notifyMail.Send(recipient, subject, message); err != nil {
 			log.Fatal(err)
 		}
+		os.Exit(0)
 	}
 	if err = notifyMail.SendTemplate(recipient, subject, template, variables); err != nil {
 		log.Fatal(err)
