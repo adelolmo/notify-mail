@@ -1,2 +1,11 @@
 .idea
+*.iml
 build
+obj*
+debian/notify-mail
+debian/debhelper-build-stamp
+debian/.debhelper
+debian/files
+debian/notify-mail.debhelper.log
+debian/notify-mail.substvars
+release

@@ -1,8 +1,0 @@
-Package: notify-mail
-Version: {{version}}
-Section: extras
-Priority: standard
-Architecture: {{architecture}}
-Maintainer: Andoni del Olmo <andoni.delolmo@gmail.com>
-Installed-Size: {{size}}
-Description: Send mail notifications

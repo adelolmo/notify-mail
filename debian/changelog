@@ -1,0 +1,7 @@
+notify-mail (1.2.2) unstable; urgency=medium
+
+  * implement message template.
+  * validate variables parameter.
+  * fix message delivery
+
+ -- Andoni del Olmo <andoni.delolmo@gmail.com>  Sat, 06 Jun 2020 18:22:45 +0200
