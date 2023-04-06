@@ -1,7 +1,7 @@
 package mail
 
 import (
-	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -14,7 +14,7 @@ func NewTemplate(placeholders map[string]string) *Template {
 }
 
 func (t *Template) ReplaceContent(filename string) (string, error) {
-	input, err := ioutil.ReadFile(filename)
+	input, err := os.ReadFile(filename)
 	if err != nil {
 		return "", err
 	}
