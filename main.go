@@ -2,10 +2,11 @@ package main
 
 import (
 	"flag"
-	"github.com/adelolmo/notify-mail/mail"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/adelolmo/notify-mail/mail"
 )
 
 func main() {
@@ -13,25 +14,27 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	recipient, subject, message, template, variables := parseArguments()
+	recipient, subject, message, template, variables, attachments := parseArguments()
 	if len(message) > 0 {
-		if err = notifyMail.Send(recipient, subject, message); err != nil {
+		if err = notifyMail.Send(recipient, subject, message, attachments...); err != nil {
 			log.Fatal(err)
 		}
 		os.Exit(0)
 	}
-	if err = notifyMail.SendTemplate(recipient, subject, template, variables); err != nil {
+	if err = notifyMail.SendTemplate(recipient, subject, template, variables, attachments...); err != nil {
 		log.Fatal(err)
 	}
 }
 
-func parseArguments() (string, string, string, string, map[string]string) {
+func parseArguments() (string, string, string, string, map[string]string, []string) {
 	recipient := flag.String("recipient", "", "Recipient address")
 	subject := flag.String("subject", "", "Notification subject")
 	message := flag.String("message", "", "Message content")
 	template := flag.String("template", "", "Template filename")
 	variablesString := flag.String("variables", "",
 		"Template variables with format: var1=value of var1,var2=value of var2")
+	attachmentsString := flag.String("attachment", "",
+		"Attachment file paths, comma-separated")
 	flag.Parse()
 
 	if len(*recipient) == 0 {
@@ -50,5 +53,11 @@ func parseArguments() (string, string, string, string, map[string]string) {
 			m[keyValue[0]] = keyValue[1]
 		}
 	}
-	return *recipient, *subject, *message, *template, m
+
+	var attachments []string
+	if len(*attachmentsString) > 0 {
+		attachments = strings.Split(*attachmentsString, ",")
+	}
+
+	return *recipient, *subject, *message, *template, m, attachments
 }

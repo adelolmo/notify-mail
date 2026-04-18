@@ -72,6 +72,14 @@ export NOTIFY_MAIL_PASSWORD=your_password
 notify-mail -recipient="email_address@email_provider.com" -subject="Notification" -message="Your message"
 ```
 
+## Send with attachments
+
+```
+notify-mail -recipient="email_address@email_provider.com" -subject="Notification" -message="Your message" -attachment="/path/to/file1.pdf,/path/to/file2.png"
+```
+
+Multiple attachments are comma-separated. Each attachment file must exist on the local filesystem.
+
 ## Send with template
 
 Template example:
@@ -86,6 +94,12 @@ Template example:
 
 ```
 notify-mail -recipient="email_address@email_provider.com" -subject="Notification" -template="/path/to/template.html" -variables="{{var1}}=value of var1,{{var2}}=value of var2"
+```
+
+You can also attach files when using templates:
+
+```
+notify-mail -recipient="email_address@email_provider.com" -subject="Notification" -template="/path/to/template.html" -variables="{{var1}}=value of var1" -attachment="/path/to/file.pdf"
 ```
 
 The placeholders `var1` and `var2` in the template will be replaced by the values given in the `variables` parameter. 
