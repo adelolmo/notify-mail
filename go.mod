@@ -1,3 +1,3 @@
 module github.com/adelolmo/notify-mail
 
-go 1.14
+go 1.24
