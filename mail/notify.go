@@ -18,23 +18,17 @@ type Mail struct {
 	Authentication smtp.Auth
 }
 
-func NewNotification() (*Mail, error) {
-	keys := []string{
-		"NOTIFY_MAIL_ACCOUNT",
-		"NOTIFY_MAIL_PASSWORD",
+func NewNotification(account, password string) (*Mail, error) {
+	if account == "" {
+		return nil, fmt.Errorf("account is required")
 	}
-	n := map[string]string{}
-	for _, key := range keys {
-		v := os.Getenv(key)
-		if v == "" {
-			return nil, fmt.Errorf("environment variable %q is required", key)
-		}
-		n[key] = v
+	if password == "" {
+		return nil, fmt.Errorf("password is required")
 	}
 	auth := smtp.PlainAuth(
 		"Notification",
-		n["NOTIFY_MAIL_ACCOUNT"],
-		n["NOTIFY_MAIL_PASSWORD"],
+		account,
+		password,
 		"smtp.gmail.com",
 	)
 	return &Mail{

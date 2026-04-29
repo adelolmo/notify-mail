@@ -6,31 +6,22 @@ import (
 	"testing"
 )
 
-func TestNewNotification_MissingAccountEnv(t *testing.T) {
-	os.Unsetenv("NOTIFY_MAIL_ACCOUNT")
-	os.Unsetenv("NOTIFY_MAIL_PASSWORD")
-
-	_, err := NewNotification()
+func TestNewNotification_MissingAccount(t *testing.T) {
+	_, err := NewNotification("", "secretpassword")
 	if err == nil {
-		t.Fatal("expected error when NOTIFY_MAIL_ACCOUNT is missing")
+		t.Fatal("expected error when account is missing")
 	}
 }
 
-func TestNewNotification_MissingPasswordEnv(t *testing.T) {
-	os.Setenv("NOTIFY_MAIL_ACCOUNT", "test@gmail.com")
-	os.Unsetenv("NOTIFY_MAIL_PASSWORD")
-
-	_, err := NewNotification()
+func TestNewNotification_MissingPassword(t *testing.T) {
+	_, err := NewNotification("test@gmail.com", "")
 	if err == nil {
-		t.Fatal("expected error when NOTIFY_MAIL_PASSWORD is missing")
+		t.Fatal("expected error when password is missing")
 	}
 }
 
 func TestNewNotification_Success(t *testing.T) {
-	os.Setenv("NOTIFY_MAIL_ACCOUNT", "test@gmail.com")
-	os.Setenv("NOTIFY_MAIL_PASSWORD", "secretpassword")
-
-	m, err := NewNotification()
+	m, err := NewNotification("test@gmail.com", "secretpassword")
 	if err != nil {
 		t.Fatalf("unexpected error: %s", err)
 	}

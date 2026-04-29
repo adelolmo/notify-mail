@@ -10,7 +10,9 @@ import (
 )
 
 func main() {
-	notifyMail, err := mail.NewNotification()
+	account := os.Getenv("NOTIFY_MAIL_ACCOUNT")
+	password := os.Getenv("NOTIFY_MAIL_PASSWORD")
+	notifyMail, err := mail.NewNotification(account, password)
 	if err != nil {
 		log.Fatal(err)
 	}
